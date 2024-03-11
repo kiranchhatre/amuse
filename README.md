@@ -49,6 +49,7 @@ This is a repository for **AMUSE**: Emotional Speech-driven 3D Body Animation vi
 ## News :triangular_flag_on_post:
 
 
+- [2024/02/27] AMUSE has been accepted for CVPR 2024!
 - [2023/12/08] <a href="https://arxiv.org/abs/2312.04466">ArXiv</a> is available.
 
 ## Citation
