@@ -1,0 +1,49 @@
+{
+  "Dir": {
+        "submission_dir_cluster_side": "/home/kchhatre/Work/code/disentangled-s2g/cluster-logs",
+        "project": "dis_s2g",
+        "model_type": "diffeval", 
+        "model_type_options": ["mfcc", "dtw", "diff-lmdb", "diff", "diffeval"],
+        "logdir": "logs",
+        "cluster_repo_dir": "/home/kchhatre/Work/code/disentangled-s2g/scripts",
+        "cluster_script_path": "full_train.py", 
+        "env": "dis_s2g",
+        "job_name": "dis_s2g",
+        "cuda_version": "11.3"
+  }, 
+  "Constants": {
+      "config_root": "cluster_settings.json",
+      "python_bin": "/home/kchhatre/anaconda3/envs/dis_s2g/bin/python",
+      "username": "kchhatre"
+  },
+  "Compute": {
+    "cpus": 8,
+    "gpus": 1,
+    "mem_gb": 40,
+    "max_time_h": 8,
+    "max_price": 10000,
+    "node": "",
+    "node_options": "check condor_nodes, condor_free",
+    "device_model": "Tesla V100-PCIE-16GB",
+    "devices": [
+      "Tesla P40",
+      "Tesla P100-PCIE-16GB", 
+      "Tesla V100-PCIE-16GB", 
+      "Tesla V100-PCIE-32GB",
+      "Tesla V100-SXM2-32GB",
+      "NVIDIA GeForce RTX 2080 Ti", 
+      "Quadro RTX 6000", 
+      "NVIDIA A100-SXM4-80GB", 
+      "NVIDIA A100-SXM4-40GB"],
+    "num_jobs": 1,
+    "gpu_memory_min_gb": 8,
+    "gpu_memory_max_gb": 48,
+    "concurrency_tag": 0,
+    "max_concurrent_jobs": 0,
+    "bid": 1000
+  },
+  "Script_args": {
+      "one_liner_args": "--video /home/kchhatre/Work/code/nha-old/videos/angry.mp4 --out_path /home/kchhatre/Work/code/nha-old/videos/results/preproc/a",
+      "shell_args": "100 0 1 1 1 0 0 1"
+  }
+}

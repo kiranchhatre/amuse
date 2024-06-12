@@ -1,0 +1,33 @@
+{
+    "ablation": {
+        "PE_TYPE": "mld",
+        "MLP_DIST": false
+    },
+    "arch_main": {
+        "nfeats": 201,
+        "latent_dim": [
+            1,
+            128
+        ],
+        "ff_size": 512,
+        "num_layers": 9,
+        "num_heads": 4,
+        "dropout": 0.1,
+        "arch": "encoder_decoder",
+        "normalize_before": false,
+        "activation": "gelu",
+        "position_embedding": "learned"
+    },
+    "losses": {
+        "stage": "vae",
+        "LAMBDA_PRIOR": 0.0,
+        "LAMBDA_GEN": 0.0,
+        "LAMBDA_LATENT": 0.0,
+        "LAMBDA_KL": 1e-05,
+        "LAMBDA_REC": 1.0,
+        "LAMBDA_JOINT": 1.0,
+        "use_recons_joints": false,
+        "predict_epsilon": false
+    },
+    "metrics": {}
+}

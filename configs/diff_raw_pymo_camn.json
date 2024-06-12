@@ -1,0 +1,105 @@
+{
+    "encoder_options": ["lstm", "timm"],
+    "autoregressive": false,
+    "pose_encoder": "lstm",
+    "face_encoder": "timm",
+    "loss": ["pos_rec_loss_camn", "fac_rec_loss_camn"],
+    "loss_factory": {
+        "pos_rec_loss_camn": {
+            "name": "huber",
+            "beta": 0.1,
+            "rec_weight": 1
+        },
+        "fac_rec_loss_camn": {
+            "name": "huber",
+            "beta": 0.1,
+            "rec_weight": 1
+        }
+    },
+    "seq_len": 100,
+    "lstm": {
+        "njoints": {
+            "content": 8,
+            "emotion": 15,
+            "combo": 23
+        },
+        "latent_dim": 16,
+        "nfeats": 3,
+        "ff_size": 0,
+        "num_layers": 4,
+        "num_heads": 0,
+        "dropout": 0.3,
+        "activation": "",
+        "batch_first": true,
+        "bidir": true,
+        "use_discriminator": false
+    },
+    "timm": {
+        "njoints" : {
+            "content": 19,
+            "emotion": 32,
+            "combo": 51
+        },
+        "latent_dim": 16,
+        "nfeats": 1,
+        "ff_size": 0,
+        "num_layers": 4,
+        "num_heads": 0,
+        "dropout": 0.3,
+        "activation": "",
+        "batch_first": true,
+        "bidir": true,
+        "use_discriminator": false
+    },
+    "cond_mode": {
+        "type": "audio",
+        "cond_mode_options": ["unconstrained", "dis_audio_txt", "dis_audio", "txt", "audio_txt", "audio"],
+        "addon": "speaker_emotion",
+        "addon_options": ["speaker", "emotion", "speaker_emotion", ""],
+        "txt": {
+            "cond_mask_prob": 0.1,
+            "tcn_levels": 2,
+            "tokenizer": "fast",
+            "tokenizer_options": ["fast", "gpt2"],
+            "input_size": {
+                "gpt2": 768,
+                "gpt2-medium": 1024,
+                "gpt2-large": 1280,
+                "gpt2-xl": 1600
+            },
+            "nonlinear": false,
+            "latent_dim": 16
+        },
+        "audio": {
+            "cond_mask_prob": 0.1,
+            "tcn_levels": 2,
+            "raw_channel": 1,
+            "raw_feat": 128,
+            "dis": {
+                "content": 256,
+                "emotion": 128
+            },
+            "combined_latent": 13,
+            "nonlinear": false,
+            "latent_dim": 16
+        },
+        "speaker": {
+            "count": 30,
+            "latent_dim": 8
+        },
+        "emotion": {
+            "count": 8,
+            "latent_dim": 8
+        }
+    },
+    "fusion": {
+        "type": "CaMN",
+        "fusion_options": ["CaMN", "MulT"],
+        "CaMN": {
+            "latent_dim": 16
+        },
+        "MulT": {
+            "": ""
+        }
+    }
+} 

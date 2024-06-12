@@ -1,0 +1,169 @@
+{
+    "encoder_options": ["trans_enc", "trans_dec", "gru", "trans_fftype_dec"],
+    "use_ddpm": true,
+    "autoregressive": true,
+    "pose_encoder": "trans_dec",
+    "face_encoder": "trans_face_dec",
+    "loss_options": ["lambda_rcxyz", "lambda_vel", "lambda_fc", "ff_mse", "lambda_l2"],
+    "loss_pose": ["lambda_l2"],
+    "loss_face": ["ff_mse"],
+    "loss": [""],
+    "loss_factory": {
+        "lambda_rcxyz": {
+            "name": "lrcxyz",
+            "default": 0.0,
+            "rec_weight": 1
+        },
+        "lambda_vel": {
+            "name": "lvel",
+            "default": 0.0,
+            "rec_weight": 1
+        },
+        "lambda_fc": {
+            "name": "lfc",
+            "default": 0.0,
+            "rec_weight": 1
+        },
+        "lambda_l2": {
+            "name": "ll2",
+            "rec_weight": 1
+        },
+        "ff_mse": {
+            "name": "mse",
+            "rec_weight": 1
+        }
+    },
+    "seq_len": 100,
+    "trans_enc": {
+        "pose_rep": "vel_norm",
+        "pose_rep_options": ["vel_norm", "vel"],
+        "njoints": {
+                "content": 8,
+                "emotion": 15,
+                "combo": 23
+        },
+        "nfeats": 3,
+        "latent_dim": 512,
+        "ff_size": 1024,
+        "num_layers": 8,
+        "num_heads": 4,
+        "dropout": 0.1,
+        "activation": "gelu",
+        "batch_first": false,
+        "bidir": false,
+        "use_discriminator": false
+    },
+    "trans_dec": {
+        "emb_trans_dec": false,
+        "concat_emb_memory": false,
+        "pose_rep": "vel_norm",
+        "pose_rep_options": ["vel_norm", "vel"],
+        "njoints": {
+                "content": 8,
+                "emotion": 15,
+                "combo": 23
+        },
+        "nfeats": 3,
+        "latent_dim": 64,
+        "ff_size": 128,
+        "num_layers": 1,
+        "num_heads": 4,
+        "dropout": 0.1,
+        "activation": "gelu",
+        "batch_first": false,
+        "bidir": false,
+        "use_discriminator": false
+    },
+    "gru": {
+        "": ""
+    },
+    "trans_fftype_dec": {
+        "" : ""
+    },
+    "trans_face_dec": {
+        "njoints" : {
+            "content": 19,
+            "emotion": 32,
+            "combo": 51
+        },
+        "latent_dim": 128,
+        "period": 30,
+        "nfeats": 1,
+        "ff_size": 256,
+        "num_layers": 2,
+        "num_heads": 4,
+        "max_seq_len": 600,
+        "dropout": 0.1,
+        "activation": "",
+        "batch_first": true,
+        "bidir": false,
+        "vec_bias": false,
+        "use_discriminator": false
+    },
+    "cond_mode": {
+
+        "OPTIONS1": "FACE ONLY",
+        "default_ff": "dis_audio_speaker",
+        "default_ff_options": ["dis_audio_speaker", "audio_speaker"],
+        "addon": "emotion",
+        "addon_options": ["emotion", ""],
+
+        "OPTIONS2": "BVH ONLY",
+        "default_mdm": "dis_audio",
+        "default_mdm_options": ["dis_audio", "audio"],
+        "addon_mdm": "",
+        "addon_mdm_options": ["emotion", "speaker", "emotion_speaker", ""],
+
+        "OPTIONS3": "BVH AND FACE",
+        "type": "unconstrained",
+        "cond_mode_options": ["unconstrained", "txt"],
+        "force_mask": false,
+        
+        "txt": {
+            "cond_mask_prob": 0.1,
+            "tcn_levels": 2,
+            "tokenizer": "fast",
+            "tokenizer_options": ["fast", "gpt2"],
+            "input_size": {
+                "gpt2": 768,
+                "gpt2-medium": 1024,
+                "gpt2-large": 1280,
+                "gpt2-xl": 1600
+            },
+            "nonlinear": false,
+            "latent_dim": 16
+        },
+        "audio": {
+            "cond_mask_prob": 0.1,
+            "tcn_levels": 2,
+            "raw_channel": 1,
+            "raw_feat": 128,
+            "dis": {
+                "content": 256,
+                "emotion": 128
+            },
+            "combined_latent": 13,
+            "combo_tcn_channels": 6,
+            "nonlinear": false,
+            "latent_dim": 64
+        },
+        "speaker": {
+            "count": 30,
+            "latent_dim": 8
+        },
+        "emotion": {
+            "count": 8,
+            "latent_dim": 8
+        }
+    },
+    "fusion": {
+        "type": "MulT",
+        "fusion_options": ["CaMN", "MulT"],
+        "CaMN": {
+            "latent_dim": 16
+        },
+        "MulT": {
+            "latent_dim": 16
+        }
+    }
+} 

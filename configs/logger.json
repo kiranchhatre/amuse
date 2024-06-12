@@ -1,0 +1,16 @@
+{
+    "WANDB_PARAM": {
+        "api": "API",
+        "project": "PROJECT", 
+        "entity": "ENTITY"
+    },
+    "wav_mfcc": {
+        "tags": [""]
+    },
+    "wav_dtw_mfcc": {
+        "tags": [""]
+    },
+    "diffusion": {
+        "": [""]
+    }
+}

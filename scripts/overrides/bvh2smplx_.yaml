@@ -1,0 +1,5 @@
+DATA_PARAM:
+  Bvh: 
+    bvh2smplbvh: True
+    smplx_extract_path: viz_dump/smplx_conversions
+    # store bvh in beat-rawdata-eng/beat_rawdata_english/<<actor>>/<<*.bvh>>

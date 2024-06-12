@@ -1,0 +1,97 @@
+{
+  "hyperparameters": [
+    {
+      "name": "batch_size",
+      "type": "categorical",
+      "choices": [
+        16,
+        32,
+        64,
+        128
+      ],
+      "default": 64,
+      "weights": null
+    },
+    {
+      "name": "dropout",
+      "type": "uniform_float",
+      "log": true,
+      "lower": 0.01,
+      "upper": 0.3,
+      "default": 0.1
+    },
+    {
+      "name": "ff_size",
+      "type": "categorical",
+      "choices": [
+        64,
+        128,
+        256,
+        512,
+        1024
+      ],
+      "default": 1024,
+      "weights": null
+    },
+    {
+      "name": "lambda_kl",
+      "type": "uniform_float",
+      "log": true,
+      "lower": 1e-10,
+      "upper": 1e-05,
+      "default": 1e-07
+    },
+    {
+      "name": "latent_dim",
+      "type": "categorical",
+      "choices": [
+        64,
+        128,
+        256,
+        512
+      ],
+      "default": 256,
+      "weights": null
+    },
+    {
+      "name": "lr_base",
+      "type": "uniform_float",
+      "log": true,
+      "lower": 1e-08,
+      "upper": 0.1,
+      "default": 0.0001
+    },
+    {
+      "name": "num_heads",
+      "type": "categorical",
+      "choices": [
+        4,
+        8
+      ],
+      "default": 4,
+      "weights": null
+    },
+    {
+      "name": "num_layers",
+      "type": "uniform_int",
+      "log": false,
+      "lower": 7,
+      "upper": 13,
+      "default": 9
+    },
+    {
+      "name": "use_recons_joints",
+      "type": "categorical",
+      "choices": [
+        true,
+        false
+      ],
+      "default": true,
+      "weights": null
+    }
+  ],
+  "conditions": [],
+  "forbiddens": [],
+  "python_module_version": "0.6.1",
+  "json_format_version": 0.4
+}

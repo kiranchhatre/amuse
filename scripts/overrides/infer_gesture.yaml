@@ -1,0 +1,63 @@
+DATA_PARAM:
+  Bvh: 
+    bvh2smplbvh: False
+TRAIN_PARAM:
+  tag: latent_diffusion
+  motion_extractor:
+    use: False
+    tag: 
+    task: train 
+    metrics_only: False # False True
+  pretrained_infer: True
+  wav_dtw_mfcc:
+    noise: True
+    ablation: full 
+    ablation_version: v1 
+    frame_based_feats: True 
+  diffusion:
+    lmdb_cache: BEAT-cache/2023-10-28_30F_fing_smplx_MOSH_full_v1_feat_based_300  
+  latent_diffusion:
+    smplx_rep: 6D  
+    pretrained_ast: wav_dtw_mfcc_20231022-044436_actors 
+    pretrained_lpdm: LPDM_20231028-210758_actors_smplx
+    pretrained_prior_lpdm_e: best 
+    pretrained_ldm_lpdm_e: best 
+    smpl_viz_mode: BLENDER_EEVEE # BLENDER_EEVEE, CYCLES
+    half_body: True 
+    train_upper_body: False 
+    skip_trans: False 
+    vtex_displacement: False 
+    zero_trans: False 
+    freeze_init_LoBody: False 
+  motion_feature_extractor:
+    model: 
+  test:
+    emotion_control:
+      use: False # False True            
+      overwrite: "amusepp_all_tests/SUPMATMETRIC-LPDM_20231028-210758_actors_smplx"       
+      actor: "[wayne]" # wayne, scott, solomon, lawrence, stewart, sophie, miranda, kieks, zhao, lu, jorge, daiki, ayana, katya
+      content_emotion: "[neutral]"
+      take_element: "first" # first last random
+    style_transfer:
+      use: False # False True
+      overwrite: 
+      actors: "[lu-lawrence]"
+      emotion: "[angry]"
+    style_Xemo_transfer:
+      use: False # False True
+      overwrite: "amusepp_all_tests/SUPMAT-styleXem-LPDM_20231028-210758_actors_smplx"
+      actors: "[scott-lu]"
+      emotion: "[happy-angry]"
+    audio_list:
+      use: True # False True
+      short_audio_list: False # False True
+      overwrite: 
+      processed_audios: 15
+      vidlist: "vidlist.csv"
+    diff_only: False # False True
+  baselines:
+    run: False # False True
+    prepare_dm: False # False True  
+    renders:
+      task: custom_renders # custom_renders YT_monologues_renders
+      subtask:

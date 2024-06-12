@@ -1,0 +1,82 @@
+{
+    "ablation": {
+        "PE_TYPE": "mld",
+        "MLP_DIST": false
+    },
+    "arch_main": {
+        "nfeats": 201,
+        "latent_dim": [
+            1,
+            128
+        ],
+        "ff_size": 512,
+        "num_layers": 9,
+        "num_heads": 4,
+        "dropout": 0.1,
+        "guidance_scale": 7.5,
+        "guidance_uncondp": 0.1,
+        "arch": "encoder_decoder",
+        "normalize_before": false,
+        "activation": "gelu",
+        "position_embedding": "learned"
+    },
+    "arch_denoiser": {
+        "nfeats": 201,
+        "latent_dim": [
+            1,
+            128
+        ],
+        "ff_size": 512,
+        "num_layers": 9,
+        "num_heads": 4,
+        "dropout": 0.1,
+        "guidance_scale": 7.5,
+        "guidance_uncondp": 0.1,
+        "arch": "trans_enc",
+        "normalize_before": false,
+        "activation": "gelu",
+        "position_embedding": "learned",
+        "cond_dim": 256,
+        "nclasses": 7,
+        "freq_shift": 0,
+        "ablation_skip_connection": true,
+        "pe_type": "mld",
+        "flip_sin_to_cos": true,
+        "return_intermediate_dec": false,
+        "diffusion_only": false
+    },
+    "noisy_scheduler": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "variance_type": "fixed_small",
+        "clip_sample": false,
+        "prediction_type": "epsilon"
+    },
+    "scheduler": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "set_alpha_to_one": false,
+        "steps_offset": 1,
+        "num_inference_timesteps": 50,
+        "eta": 0.0
+    },
+    "losses": {
+        "train_lpdm": {
+            "version": "v0"
+        },
+        "stage": "vae_diffusion",
+        "LAMBDA_PRIOR": 0.0,
+        "LAMBDA_GEN": 1.0,
+        "LAMBDA_LATENT": 1.0,
+        "LAMBDA_KL": 0.0001,
+        "LAMBDA_REC": 1.0,
+        "LAMBDA_JOINT": 1.0,
+        "use_recons_joints": true,
+        "predict_epsilon": true
+    },
+    "metrics": {}
+}

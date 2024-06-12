@@ -1,0 +1,377 @@
+{
+    "DATA_PARAM": {
+        "Bvh": {
+            "bvh2smplbvh": false,
+            "smplx_extract_path": "viz_dump/smplx_conversions",
+            "mosh_extract_path": "/ps/scratch/kchhatre/Work/dis_s2g_backup/moshed/v1",
+            "mosh_extract_path_v1": "/ps/scratch/kchhatre/Work/dis_s2g_backup/moshed_v1/beat_english_v1.2.0/smplxflame_30",
+            "fps": 30,
+            "pymo_based": {
+                "use": false,
+                "fingers": true,
+                "roottransformer": false,
+                "all_data": false,
+                "all_eng_data": true,
+                "version": "pymo_dB_v2_emotional_fing",
+                "con": [
+                    "pymo_dB_v0_con_feats",
+                    45
+                ],
+                "emo": [
+                    "pymo_dB_v0_emo_feats",
+                    24
+                ],
+                "combined": [
+                    "pymo_dB_v0_combined_feats",
+                    69
+                ]
+            },
+            "joint_name_list": "joint_name_list_27",
+            "dwnsmpl_factor": "f4",
+            "con_emo_div": {
+                "use": false,
+                "con": "audio_sync_j_v0",
+                "emo": "remaining_j_v0",
+                "combined": "combined_v0",
+                "version_label": "v0"
+            },
+            "norm_bvh_in_lmdb": false,
+            "train_pose_framelen": 300
+        },
+        "Wav": {
+            "n_fft": 2048,
+            "hop_length": 128,
+            "n_mels": 128,
+            "win_length": null,
+            "win_step": 0.01,
+            "n_mfcc": 13,
+            "sample_rate": 16000,
+            "f_min": 0,
+            "f_max": null,
+            "power": 2.0,
+            "center": false,
+            "mel_scale": "htk",
+            "norm": null,
+            "mfcc_feat_per_frame": 28,
+            "waveform_in_lmdb": false
+        },
+        "Json": {
+            "fps": 30,
+            "con_emo_div": {
+                "con": "audio_lip_sync_facs_v0",
+                "emo": "remaining_facs_v0",
+                "combined": "combined_facs_v0"
+            }
+        },
+        "Txtgrid": {
+            "tokenizer": "gpt2",
+            "in_dm": false,
+            "hf_model": "gpt2",
+            "fps": 30
+        },
+        "Emo": {},
+        "Sem": {
+            "use_sem_emb": false,
+            "fps": 30
+        }
+    },
+    "TRAIN_PARAM": {
+        "tag": "latent_diffusion",
+        "motion_extractor": {
+            "use": false,
+            "tag": "motion_feature_extractor",
+            "task": "train",
+            "metrics_only": false
+        },
+        "parallelism": "none",
+        "seed": 2024,
+        "display_model_info": false,
+        "pretrained_infer": false,
+        "val_actors": [
+            "solomon",
+            "kexin",
+            "tiffnay"
+        ],
+        "test_actors": [
+            "catherine",
+            "zhang",
+            "wayne"
+        ],
+        "val_actors_v1": [
+            "nidal",
+            "zhang",
+            "carlos",
+            "itoi",
+            "jaime",
+            "li"
+        ],
+        "test_actors_v1": [
+            "luqi",
+            "hailing",
+            "kexin",
+            "goto",
+            "tiffnay",
+            "hanieh"
+        ],
+        "wav_dtw_mfcc": {
+            "ablation": "full",
+            "ablation_version": "v1",
+            "training_version": "v0",
+            "balance_neutral": true,
+            "atnet_lstm_18": "atnet/atnet_lstm_18.pth",
+            "pretrained_ser": "wav_mfcc_20230608-212653_actors",
+            "use_triplet": false,
+            "batch_size": 1,
+            "infer_batch_size": 1,
+            "lr_old": 0.0002,
+            "lr": 1e-05,
+            "weight_decay": 5e-07,
+            "beta1": 0.95,
+            "beta2": 0.999,
+            "lrscheduler_start": 5,
+            "lrscheduler_gamma": 0.85,
+            "lrscheduler_step": 1,
+            "n_epochs": 25,
+            "wt_init": "kaiming",
+            "shuffle_type": "actors",
+            "num_mel_bins": 128,
+            "target_length": 1024,
+            "freqm": 24,
+            "timem": 96,
+            "mixup": 0,
+            "dataset_mean": -9.173025,
+            "dataset_std": 5.062332,
+            "frame_based_feats": true,
+            "noise": true
+        },
+        "diffusion": {
+            "balance_neutral": true,
+            "lmdb_cache": "BEAT-cache/2023-10-28_30F_fing_smplx_MOSH_full_v1_feat_based_300",
+            "lmdb_workaround_loop": false,
+            "atnet_lstm_18": "atnet/atnet_lstm_18.pth",
+            "pretrained_ser": "",
+            "pretrained_dtw": "wav_dtw_mfcc_20230130-204015_actors",
+            "pretrained_diff": "diffusion_20230226-020712_actors",
+            "processed_bvh": "bvh-fps25-div-pymo_dB_v0",
+            "blender": {
+                "local": "/home/kchhatre/Work/blender-3.4.1-linux-x64/blender",
+                "cluster": "/home/kchhatre/Work/blender-3.4.1-linux-x64/blender",
+                "cluster_36": "/is/cluster/kchhatre/Work/blender-3.6.0-linux-x64/blender",
+                "local_config": "/home/kchhatre/.config/blender/3.4/scripts/addons",
+                "cluster_config": "/home/kchhatre/.config/blender/3.4/scripts/addons",
+                "cluster_36_config": "/home/kchhatre/.config/blender/3.6/scripts/addons"
+            },
+            "viz_type": "CaMN",
+            "clothed": false,
+            "arch": "diff_raw_mdm",
+            "shuffle_type": "actors",
+            "con_emo_div": {
+                "mfcc": true,
+                "bvh": true,
+                "face": true,
+                "train_modality": "bvh"
+            },
+            "optimizer_name": "adam",
+            "optimizer_name_ff": "adam",
+            "optimizer_name_mdm": "adamw",
+            "batch_size": 128,
+            "batch_size_ff": 1,
+            "eval_size_ff": 400,
+            "batch_size_mdm": 64,
+            "batch_size_mdm_eval": 32,
+            "infer_batch_size": 1,
+            "mdm_eval_mode": "wo_mm",
+            "mdm_eval_cfg": {
+                "wo_mm": {
+                    "num_samples_limit": 1000,
+                    "run_mm": false,
+                    "mm_num_samples": 0,
+                    "mm_num_repeats": 0,
+                    "mm_num_times": 0,
+                    "diversity_times": 300,
+                    "replication_times": 5
+                }
+            },
+            "n_epochs": 500,
+            "n_epochs_ff": 200,
+            "n_epochs_mdm": 4000,
+            "lr_base": 0.00025,
+            "lr_weight": 1,
+            "lr_ff": 0.0001,
+            "lr_mdm": 0.0001,
+            "lr_anneal_steps_mdm": false,
+            "weight_decay": 0,
+            "weight_decay_mdm": 0,
+            "eval_rep_times_mdm": 3,
+            "momentum": 0.8,
+            "filter_bias_and_bn": false,
+            "opt_betas": [
+                0.5,
+                0.999
+            ],
+            "seed_pose": 15,
+            "grad_clip": {
+                "use": false,
+                "lstm_grad_clip": 100
+            },
+            "diff_mdm": {
+                "use": true,
+                "use_ddp": false,
+                "use_fp16": false,
+                "fp16_scale_growth": 0.001,
+                "noise_schedule": "cosine",
+                "diffusion_steps": 1000,
+                "sigma_small": true,
+                "guidance_param": 2.5,
+                "predict_xstart": true,
+                "scale_beta": 1.0,
+                "timestep_respacing": "",
+                "learn_sigma": false,
+                "rescale_timesteps": false,
+                "schedule_sampler": "uniform"
+            }
+        },
+        "motionprior": {
+            "emotional": true,
+            "sweep": false,
+            "sweep_n_epochs": [
+                25,
+                100
+            ],
+            "sweep_given_budget": 0,
+            "sweep_trials": 100,
+            "sweep_init_cfgs": 5,
+            "all_processed_motion": "bvh-fps25-div-pymo_dB_v2_emotional_fing",
+            "balance_neutral": false,
+            "shuffle_type": "actors",
+            "batch_size": 64,
+            "n_epochs": 6000,
+            "viz_type": "CaMN",
+            "clothed": true,
+            "clothed_actor": "wayne",
+            "clothed_actor_options": "stewart, yingqing",
+            "amass_joints": "BP2KA",
+            "smpl_viz": true,
+            "smpl_viz_mode": "BLENDER_EEVEE",
+            "smpl_viz_mode_options": [
+                "BLENDER_EEVEE",
+                "CYCLES"
+            ],
+            "cylinder_viz": false,
+            "viz_freq": 100,
+            "model_save_freq": 100,
+            "optimizer_name": "adamw",
+            "lr_base": 0.0001
+        },
+        "latent_diffusion": {
+            "smplx_data": true,
+            "smplx_data_type": "MOSH",
+            "smplx_data_type_options": "MOSH, ARP",
+            "smplx_rep": "6D",
+            "initfinallayerzero": false,
+            "sweep": false,
+            "sweep_n_epochs": [
+                25,
+                100
+            ],
+            "sweep_given_budget": 0,
+            "sweep_trials": 100,
+            "sweep_init_cfgs": 5,
+            "balance_neutral": false,
+            "batch_size": 32,
+            "shuffle_type": "actors",
+            "pretrained_dtw": "wav_dtw_mfcc_20230610-171001_actors",
+            "pretrained_ast": "wav_dtw_mfcc_20231022-044436_actors",
+            "pretrained_prior": "motionprior_long_20230729-222508_actors",
+            "pretrained_audiocon": "",
+            "pretrained_audioemo": "",
+            "pretained_baseaudio": "",
+            "pretrained_diffusion": "",
+            "pretrained_lpdm": "",
+            "pretrained_prior_lpdm_e": "best",
+            "pretrained_ldm_lpdm_e": "best",
+            "n_epochs": 12000,
+            "viz_type": "CaMN",
+            "smpl_viz_mode": "BLENDER_EEVEE",
+            "smpl_viz_mode_options": [
+                "BLENDER_EEVEE",
+                "CYCLES"
+            ],
+            "half_body": false,
+            "train_upper_body": false,
+            "skip_trans": false,
+            "lock_pymo_root": false,
+            "zero_trans": false,
+            "freeze_init_LoBody": false,
+            "vtex_displacement": true,
+            "ablation_diffusion_only": false,
+            "arch": "diff_latent_v2",
+            "viz_freq": 200,
+            "model_save_freq": 200,
+            "optimizer_name": "adamw",
+            "lr_base": 0.0001
+        },
+        "audio_con_ae": {
+            "is_training": false
+        },
+        "audio_emo_ae": {
+            "is_training": false
+        },
+        "base_audio_ae": {
+            "is_training": false
+        },
+        "debug": true,
+        "backup_experiment": false,
+        "log_tag": "v1_full_6d_vtex_b32",
+        "test": {
+            "replication_times": 1,
+            "emotion_control": {
+                "use": false,
+                "overwrite": "amusepp_all_tests/SUPMATMETRIC-LPDM_20231028-210758_actors_smplx",
+                "actor": "[wayne]",
+                "content_emotion": "[neutral]",
+                "take_element": "first"
+            },
+            "style_transfer": {
+                "use": false,
+                "overwrite": null,
+                "actors": "[lu-lawrence]",
+                "emotion": "[angry]"
+            },
+            "style_Xemo_transfer": {
+                "use": false,
+                "overwrite": "amusepp_all_tests/SUPMAT-styleXem-LPDM_20231028-210758_actors_smplx",
+                "actors": "[scott-lu]",
+                "emotion": "[happy-angry]"
+            },
+            "content_control": {
+                "use": false,
+                "overwrite": "",
+                "actor": "[zhao]"
+            },
+            "audio_list": {
+                "use": false,
+                "short_audio_list": false,
+                "overwrite": null,
+                "overwrite_info": "[NOTE!! Replaced to ps/scratch] LPDM_infer_20230718-030537_actors_smplx",
+                "processed_audios": 15,
+                "vidlist": "vidlist.csv",
+                "vidlists": "vidlist.csv, XXX.csv"
+            },
+            "diff_only": false
+        },
+        "baselines": {
+            "run": false,
+            "prepare_dm": false,
+            "render_model_tag": "LPDM_infer",
+            "path_0_1_0": "/home/kchhatre/Work/code/disentangled-s2g/data/beat-rawdata-eng/beat_rawdata_english_0.1.0/",
+            "renders": {
+                "task": "custom_renders",
+                "subtask": null,
+                "subtask_options": "BEAT_train_renders",
+                "custom_audios": "/home/kchhatre/Work1/code/amuse/viz_dump/test/speech",
+                "custom_renders": "/home/kchhatre/Work1/code/amuse/viz_dump/test/gesture"
+            }
+        }
+    }
+}

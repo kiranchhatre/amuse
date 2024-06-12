@@ -1,0 +1,17 @@
+DATA_PARAM:
+  Bvh: 
+    bvh2smplbvh: False
+TRAIN_PARAM:
+  tag: latent_diffusion
+  motion_extractor:
+    use: False
+  pretrained_infer: False
+  wav_dtw_mfcc:
+    noise: True
+    ablation: full
+    ablation_version: v1
+    frame_based_feats: True
+  diffusion:
+    lmdb_cache: NEW_CACHE
+  latent_diffusion:
+    pretrained_ast: wav_dtw_mfcc_20231022-044436_actors

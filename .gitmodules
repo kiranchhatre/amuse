@@ -1,0 +1,7 @@
+[submodule "dm/utils/sk2torch"]
+	path = dm/utils/sk2torch
+	url = https://github.com/kiranchhatre/sk2torch.git
+[submodule "dm/utils/PyMO"]
+	path = dm/utils/PyMO
+	url = https://github.com/kiranchhatre/PyMO.git
+	branch = init

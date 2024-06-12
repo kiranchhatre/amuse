@@ -1,0 +1,172 @@
+{
+  "stats": {
+    "submitted": 7,
+    "finished": 6,
+    "running": 1
+  },
+  "data": [
+    [
+      1,
+      null,
+      209652396,
+      25.0,
+      0.7787522077560425,
+      3.1981983184814453,
+      1,
+      1685906320.3831246,
+      1685906323.5831401,
+      {}
+    ],
+    [
+      2,
+      null,
+      209652396,
+      25.0,
+      0.7735117673873901,
+      1.596778154373169,
+      1,
+      1685906323.5854638,
+      1685906325.183209,
+      {}
+    ],
+    [
+      3,
+      null,
+      209652396,
+      25.0,
+      0.7179688811302185,
+      0.35218238830566406,
+      1,
+      1685906325.1865673,
+      1685906325.539873,
+      {}
+    ],
+    [
+      3,
+      null,
+      209652396,
+      75.0,
+      0.7047096490859985,
+      0.3387429714202881,
+      1,
+      1685906325.5439317,
+      1685906325.8838367,
+      {}
+    ],
+    [
+      4,
+      null,
+      209652396,
+      25.0,
+      Infinity,
+      0.0,
+      2,
+      1685906325.9856253,
+      1685906327.1103377,
+      {
+        "traceback": "Traceback (most recent call last):\n  File \"/home/kchhatre/anaconda3/envs/gdl/envs/dis_s2g/lib/python3.8/site-packages/smac/runner/target_function_runner.py\", line 173, in run\n    rval = self(config_copy, target_function, kwargs)\n  File \"/home/kchhatre/anaconda3/envs/gdl/envs/dis_s2g/lib/python3.8/site-packages/smac/runner/target_function_runner.py\", line 246, in __call__\n    return algorithm(config, **algorithm_kwargs)\n  File \"/home/kchhatre/Work/code/disentangled-s2g/scripts/sweep_full_train.py\", line 88, in train\n    return T.sweep_motionprior(int(budget))\n  File \"/home/kchhatre/Work/code/disentangled-s2g/scripts/trainer.py\", line 473, in sweep_motionprior\n    recons_z, dist_rm = self.model.encode(features=feats_rst)\n  File \"/home/kchhatre/Work/code/disentangled-s2g/models/latent_diffusion/vae.py\", line 158, in encode\n    dist = self.encoder(xseq,\n  File \"/home/kchhatre/anaconda3/envs/gdl/envs/dis_s2g/lib/python3.8/site-packages/torch/nn/modules/module.py\", line 1130, in _call_impl\n    return forward_call(*input, **kwargs)\n  File \"/home/kchhatre/Work/code/disentangled-s2g/models/latent_diffusion/utils/cross_attention.py\", line 49, in forward\n    x = module(x, src_mask=mask,\n  File \"/home/kchhatre/anaconda3/envs/gdl/envs/dis_s2g/lib/python3.8/site-packages/torch/nn/modules/module.py\", line 1130, in _call_impl\n    return forward_call(*input, **kwargs)\n  File \"/home/kchhatre/Work/code/disentangled-s2g/models/latent_diffusion/utils/cross_attention.py\", line 294, in forward\n    return self.forward_post(src, src_mask, src_key_padding_mask, pos)\n  File \"/home/kchhatre/Work/code/disentangled-s2g/models/latent_diffusion/utils/cross_attention.py\", line 265, in forward_post\n    src2 = self.self_attn(q, k, value=src, attn_mask=src_mask,\n  File \"/home/kchhatre/anaconda3/envs/gdl/envs/dis_s2g/lib/python3.8/site-packages/torch/nn/modules/module.py\", line 1130, in _call_impl\n    return forward_call(*input, **kwargs)\n  File \"/home/kchhatre/anaconda3/envs/gdl/envs/dis_s2g/lib/python3.8/site-packages/torch/nn/modules/activation.py\", line 1153, in forward\n    attn_output, attn_output_weights = F.multi_head_attention_forward(\n  File \"/home/kchhatre/anaconda3/envs/gdl/envs/dis_s2g/lib/python3.8/site-packages/torch/nn/functional.py\", line 5179, in multi_head_attention_forward\n    attn_output, attn_output_weights = _scaled_dot_product_attention(q, k, v, attn_mask, dropout_p)\n  File \"/home/kchhatre/anaconda3/envs/gdl/envs/dis_s2g/lib/python3.8/site-packages/torch/nn/functional.py\", line 4856, in _scaled_dot_product_attention\n    attn = softmax(attn, dim=-1)\n  File \"/home/kchhatre/anaconda3/envs/gdl/envs/dis_s2g/lib/python3.8/site-packages/torch/nn/functional.py\", line 1834, in softmax\n    ret = input.softmax(dim)\nRuntimeError: CUDA out of memory. Tried to allocate 126.00 MiB (GPU 0; 23.68 GiB total capacity; 22.14 GiB already allocated; 38.50 MiB free; 22.47 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF\n",
+        "error": "RuntimeError('CUDA out of memory. Tried to allocate 126.00 MiB (GPU 0; 23.68 GiB total capacity; 22.14 GiB already allocated; 38.50 MiB free; 22.47 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF')"
+      }
+    ],
+    [
+      5,
+      null,
+      209652396,
+      25.0,
+      0.7471410036087036,
+      0.6038768291473389,
+      1,
+      1685906327.1127217,
+      1685906327.7175853,
+      {}
+    ],
+    [
+      6,
+      null,
+      209652396,
+      25.0,
+      2147483647.0,
+      0.0,
+      0,
+      0.0,
+      0.0,
+      {}
+    ]
+  ],
+  "configs": {
+    "1": {
+      "batch_size": 64,
+      "dropout": 0.08996299860535256,
+      "ff_size": 512,
+      "lambda_kl": 2.726757388008728e-10,
+      "latent_dim": 512,
+      "lr_base": 0.000301610981062035,
+      "num_heads": 4,
+      "num_layers": 11,
+      "use_recons_joints": true
+    },
+    "2": {
+      "batch_size": 64,
+      "dropout": 0.04429649570464297,
+      "ff_size": 256,
+      "lambda_kl": 1.2620948285169323e-10,
+      "latent_dim": 512,
+      "lr_base": 1.0080289659968456e-07,
+      "num_heads": 8,
+      "num_layers": 11,
+      "use_recons_joints": true
+    },
+    "3": {
+      "batch_size": 64,
+      "dropout": 0.20761410420015303,
+      "ff_size": 256,
+      "lambda_kl": 1.4557916623227773e-06,
+      "latent_dim": 128,
+      "lr_base": 0.040990424822804454,
+      "num_heads": 4,
+      "num_layers": 11,
+      "use_recons_joints": false
+    },
+    "4": {
+      "batch_size": 64,
+      "dropout": 0.2651225974297431,
+      "ff_size": 1024,
+      "lambda_kl": 7.776492451078382e-07,
+      "latent_dim": 512,
+      "lr_base": 4.497159099879465e-05,
+      "num_heads": 8,
+      "num_layers": 13,
+      "use_recons_joints": true
+    },
+    "5": {
+      "batch_size": 32,
+      "dropout": 0.036845938035010996,
+      "ff_size": 64,
+      "lambda_kl": 2.2390342721683684e-06,
+      "latent_dim": 64,
+      "lr_base": 7.991597087441535e-06,
+      "num_heads": 4,
+      "num_layers": 11,
+      "use_recons_joints": false
+    },
+    "6": {
+      "batch_size": 128,
+      "dropout": 0.017171860465888467,
+      "ff_size": 1024,
+      "lambda_kl": 2.5943873188938765e-09,
+      "latent_dim": 256,
+      "lr_base": 8.367294151342536e-08,
+      "num_heads": 8,
+      "num_layers": 9,
+      "use_recons_joints": false
+    }
+  },
+  "config_origins": {
+    "1": "Initial Design: Random",
+    "2": "Initial Design: Random",
+    "3": "Initial Design: Random",
+    "4": "Initial Design: Random",
+    "5": "Initial Design: Random",
+    "6": "Acquisition Function Maximizer: Random Search (sorted)"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "incumbent_ids": [
+    3
+  ],
+  "rejected_config_ids": [
+    1,
+    2
+  ],
+  "incumbents_changed": 3,
+  "trajectory": [
+    {
+      "config_ids": [
+        1
+      ],
+      "costs": [
+        0.7787522077560425
+      ],
+      "trial": 1,
+      "walltime": 3.202482223510742
+    },
+    {
+      "config_ids": [
+        2
+      ],
+      "costs": [
+        0.7735117673873901
+      ],
+      "trial": 2,
+      "walltime": 4.803390741348267
+    },
+    {
+      "config_ids": [
+        3
+      ],
+      "costs": [
+        0.7179688811302185
+      ],
+      "trial": 3,
+      "walltime": 5.16020131111145
+    }
+  ],
+  "state": {
+    "tracker": {
+      "0,0": [
+        [
+          0,
+          [
+            {
+              "batch_size": 64,
+              "dropout": 0.2651225974297431,
+              "ff_size": 1024,
+              "lambda_kl": 7.776492451078382e-07,
+              "latent_dim": 512,
+              "lr_base": 4.497159099879465e-05,
+              "num_heads": 8,
+              "num_layers": 13,
+              "use_recons_joints": true
+            },
+            {
+              "batch_size": 32,
+              "dropout": 0.036845938035010996,
+              "ff_size": 64,
+              "lambda_kl": 2.2390342721683684e-06,
+              "latent_dim": 64,
+              "lr_base": 7.991597087441535e-06,
+              "num_heads": 4,
+              "num_layers": 11,
+              "use_recons_joints": false
+            },
+            {
+              "batch_size": 128,
+              "dropout": 0.017171860465888467,
+              "ff_size": 1024,
+              "lambda_kl": 2.5943873188938765e-09,
+              "latent_dim": 256,
+              "lr_base": 8.367294151342536e-08,
+              "num_heads": 8,
+              "num_layers": 9,
+              "use_recons_joints": false
+            }
+          ]
+        ]
+      ]
+    }
+  }
+}
