@@ -27,7 +27,7 @@ from pydub import AudioSegment
 from torch.autograd import Variable
 from einops import rearrange, repeat
 from pytorch3d import transforms as p3d_tfs
-from moviepy.editor import VideoFileClip, concatenate_videoclips
+from moviepy.editor import VideoFileClip, concatenate_videoclips, clips_array
 
 from dm.utils.bvh_utils import *
 from dm.utils.wav_utils import *
@@ -167,6 +167,7 @@ class trainer():
                 if self.style_Xemo_transfer: 
                     self.style_Xemo_transfer_actors = self.config["TRAIN_PARAM"]["test"]["style_Xemo_transfer"]["actors"]
                     self.style_Xemo_transfer_emotion = self.config["TRAIN_PARAM"]["test"]["style_Xemo_transfer"]["emotion"]
+                self.demo_emotion_control = self.config["TRAIN_PARAM"]["test"]["emotion_control_list"]["use"] if "emotion_control_list" in self.config["TRAIN_PARAM"]["test"].keys() else False
             else:
                 # Latent Diffusion
                 cfg_name = self.config["TRAIN_PARAM"]["latent_diffusion"]["arch"]
@@ -1032,6 +1033,69 @@ class trainer():
                         
                         print(f"END VISUALIZATION: EMOTION CONTROL {rep_i+1}/{self.config['TRAIN_PARAM']['test']['replication_times']} =====>")
                     else: print(f"END EVALUATION METRICS ONLY: EMOTION CONTROL {rep_i+1}/{self.config['TRAIN_PARAM']['test']['replication_times']} =====>")
+                    
+                if self.demo_emotion_control:
+                    
+                    actor = self.config["TRAIN_PARAM"]["test"]["emotion_control_list"]["actor"]
+                    print(f"DEMO EMOTION CONTROL EDITS for {actor} =====>")
+                    audios = list(Path(self.config["TRAIN_PARAM"]["test"]["emotion_control_list"]["audios"]).glob("*.wav"))
+                    src_a, tgt_a = [x for x in audios if "_source" in x.stem][0], [x for x in audios if "_target" in x.stem][0]
+                    target_path = Path(self.config["TRAIN_PARAM"]["test"]["emotion_control_list"]["renders"])
+                    
+                    rst = []
+                    src_a_pydub = AudioSegment.from_wav(str(src_a))
+                    src_a_arr, _ = torchaudio.load(str(src_a))
+                    src_a_arr = src_a_arr - src_a_arr.mean()
+                    src_a_con, src_a_emo, src_a_sty = self.model.process_single_seq(src_a_arr, framerate=16000, baseline=baseline)
+                    
+                    tgt_a_arr, _ = torchaudio.load(str(tgt_a))
+                    tgt_a_arr = tgt_a_arr - tgt_a_arr.mean()
+                    _, tgt_a_emo, _ = self.model.process_single_seq(tgt_a_arr, framerate=16000, baseline=baseline)
+                    
+                    feats_rst = self.model.diffusion_backward(1, src_a_con, src_a_emo, src_a_sty) # Gesture generation
+                    poses, trans = feats_rst["poses"], feats_rst["trans"]
+                    poses = rearrange(poses, "b t j d -> b t (j d)")
+                    feats_rst = torch.cat((poses,trans), dim=-1)
+                    rst.append(
+                    {
+                        "feats": feats_rst,
+                        "audio": src_a_pydub,
+                        "info": f"Original {actor}"
+                    })
+                    
+                    feats_rst = self.model.diffusion_backward(1, src_a_con, tgt_a_emo, src_a_sty) # Gesture editing
+                    poses, trans = feats_rst["poses"], feats_rst["trans"]
+                    poses = rearrange(poses, "b t j d -> b t (j d)")
+                    feats_rst = torch.cat((poses,trans), dim=-1)
+                    rst.append(
+                    {
+                        "feats": feats_rst,
+                        "audio": src_a_pydub,
+                        "info": f"Emotion edited {actor}"
+                    })
+                    
+                    video_dump_r = target_path / f"Custom_audios_{self.stamp}_E{ldm_epoch}" / f"rep{rep_i}"
+                    assert self.viz_type in ["CaMN"], "[LDM EVAL] Invalid viz type: [%s]" % self.viz_type
+                    for i, sample_dict in enumerate(rst):
+                        print(f"VISUALIZATION: LIST AUDIOS {i} =====>")
+                        video_dump = video_dump_r / f"rst_{i}"
+                        self.visualizer.animate_ldm_sample_v1(sample_dict, video_dump, self.smplx_data, self.skip_trans, without_txt=False)
+                    
+                    videos = []
+                    for i in range(2): 
+                        video_dump = video_dump_r / f"rst_{i}"
+                        for video_file in video_dump.rglob("*_single_subject_video.mp4"): 
+                            videos.append(str(video_file))
+                    combined_video_file = video_dump_r / "combined.mp4"
+                    subprocess.call([
+                        "ffmpeg", "-i", videos[0], "-i", videos[1], 
+                        "-filter_complex", "[0:v][1:v]hstack=inputs=2[v];[0:a]aresample=async=1[a]", 
+                        "-map", "[v]", "-map", "[a]", 
+                        "-c:v", "libx264", "-c:a", "aac", 
+                        str(combined_video_file)
+                    ])
+                    
+                    print(f"END VISUALIZATION: DEMO EMOTION CONTROL {rep_i+1}/{self.config['TRAIN_PARAM']['test']['replication_times']}, see {combined_video_file} =====>")
 
     def _dump_args(self):
         if not self.debug:

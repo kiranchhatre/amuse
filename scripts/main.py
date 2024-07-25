@@ -113,14 +113,17 @@ def main(args):
         trainer = trainer(config, device, train_loader, val_loader, model_path, tag, logger_cfg, model, debug=debug)
         trainer.train_dtw_ast()                                                                                                                        
 
-    elif args.fn[0] in ["train_gesture", "infer_gesture"]:
+    elif args.fn[0] in ["train_gesture", "infer_gesture", "prepare_data", "edit_gesture"]:
         
         if args.fn[0] == "prepare_data":  # Prepare LMDB dataloader
-            pass
-        
+            if "ablation" in config["TRAIN_PARAM"]["wav_dtw_mfcc"]: audio_ablation = config['TRAIN_PARAM']['wav_dtw_mfcc']['ablation']
+            else: audio_ablation = None
+            latent_diffusion_dm = full_data.latent_diffusion_dm_v2(device, verbose=True, audio_ablation=audio_ablation)
+            import sys; sys.exit("AMUSE: LMDB data prepared!")
+    
         else: # Train gesture generation model
             
-            assert (args.fn[0] == "train_gesture" and not pretrained_infer) or (args.fn[0] == "infer_gesture" and pretrained_infer), f"Arg: {args.fn[0]} and pretrained_infer: {pretrained_infer} mismatch!"
+            assert (args.fn[0] == "train_gesture" and not pretrained_infer) or (args.fn[0] in ["infer_gesture", "edit_gesture"] and pretrained_infer), f"Arg: {args.fn[0]} and pretrained_infer: {pretrained_infer} mismatch!"
             smplx_data_training = config["TRAIN_PARAM"]["latent_diffusion"]["smplx_data"]
             if not pretrained_infer:
                 assert smplx_data_training, "smplx_data must be True!"

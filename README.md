@@ -51,7 +51,8 @@ This is a repository for **AMUSE**: Emotional Speech-driven 3D Body Animation vi
 
 ## News :triangular_flag_on_post:
 
-- [2024/06/12] Code is available. 
+- [2024/07/25] Data processing and gesture editing scripts are available. 
+- [2024/06/12] Code is available.
 - [2024/02/27] AMUSE has been accepted for CVPR 2024! Working on code release.
 - [2023/12/08] <a href="https://arxiv.org/abs/2312.04466">ArXiv</a> is available.
 
@@ -60,6 +61,19 @@ This is a repository for **AMUSE**: Emotional Speech-driven 3D Body Animation vi
 ## Setup
 
 ### Main Repo Setup
+
+The project has been tested with the following configuration:
+
+- **Operating System**: Linux 5.14.0-1051-oem x86_64
+- **GCC Version**: gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
+- **CUDA Version**: CUDA 11.3
+- **Python Version**: Python 3.8.15
+- **GPU Configuration**:
+  - **Audio Model**: NVIDIA A100-SXM4-80GB
+  - **Motion Model**: NVIDIA A100-SXM4-40GB, Tesla V100-32GB
+
+**Note**: The audio model requires a larger GPU. Multiple GPU support is implemented for the audio model; however, it was not used in the final version.
+
 
 ```bash
 git clone https://github.com/kiranchhatre/amuse.git
@@ -147,17 +161,22 @@ Once the above setup is correctly done, you can execute the following:
   python main.py --fn infer_gesture
   ```
 
-- [ ] **edit_gesture**  
-  COMING SOON
+- [x] **edit_gesture**  
   ```bash
   cd $AMUSEPATH/scripts
-  python main.py --fn infer_gesture
+  python main.py --fn edit_gesture
   ```
+  For extensive editing options, please refer to the `process_loader` function in `infer_ldm.py` and experiment with different configurations in `emotion_control`, `style_transfer`, and `style_Xemo_transfer`. While editing gestures directly from speech is challenging, it offers intriguing possibilities. The task involves numerous combinations, and not all may yield optimal results. Figures A.11 and A.12 in supplementary material illustrate the inherent complexities and variations in this process.
+  Click the image below to watch the video on YouTube:
+  <div align="center">
+  <a href="https://youtu.be/48vw2NfWkJg" target="_blank">
+    <img src="https://img.youtube.com/vi/48vw2NfWkJg/maxresdefault.jpg" alt="Video Thumbnail">
+  </a>
+  </div>
+
 
 - [x] **bvh2smplx_**  
-  Convert BVH to SMPLX (only with provided BMAP presets from AMUSE website download page if possible).  
-  Highly experimental, no support.
-  Place BVH file inside `$AMUSEPATH/data/beat-rawdata-eng/beat_rawdata_english/<<actor_id>>`, where actor_id is between 1 and 30. The converted file will be in `$AMUSEPATH/viz_dump/smplx_conversions`.
+  Convert BVH to SMPL-X using the provided BMAP presets from the AMUSE website download page. Note that this feature is experimental and not officially supported. Place the BVH file inside `$AMUSEPATH/data/beat-rawdata-eng/beat_rawdata_english/<<actor_id>>`, where `actor_id` is a number between 1 and 30. The converted file will be located in `$AMUSEPATH/viz_dump/smplx_conversions`.
   ```bash
   cd $AMUSEPATH/scripts
   python main.py --fn bvh2smplx_
@@ -168,19 +187,12 @@ Once the above setup is correctly done, you can execute the following:
   <img width="50%" src="docs/static/BVH2SMPLX.gif">
 </p>
 
-- [ ] **prepare_data**  
-  Train AMUSE on BEAT 0.2.1 or BEAT-X or custom dataset.
-  COMING SOON: Conversion script, dataloader LMDB file creation.
+- [x] **prepare_data**  
+  Prepare data and create an LMDB file for training AMUSE. We provide the AMUSE-BEAT version on the project webpage. To train AMUSE on a custom dataset, you will need aligned motion and speech files. The motion data should be in an animation NPZ file compatible with the SMPL-X format.
   ```bash
   cd $AMUSEPATH/scripts
   python main.py --fn prepare_data
   ```
-
-- [ ] **other**  
-  COMING SOON
-  ```bash
-  ```
-
 
 ---
 
@@ -197,6 +209,12 @@ Once the above setup is correctly done, you can execute the following:
     url = {https://amuse.is.tue.mpg.de},
 }
 ```
+
+<br/>
+
+## Acknowledgments
+
+We would like to extend our gratitude to the authors and contributors of the following open-source projects, whose work has significantly influenced and supported our implementation: [EVP](https://github.com/jixinya/EVP), [Motion Diffusion Model](https://github.com/GuyTevet/motion-diffusion-model), [Motion Latent Diffusion](https://github.com/ChenFengYe/motion-latent-diffusion), [AST](https://github.com/YuanGongND/ast), [ACTOR](https://github.com/Mathux/ACTOR), and [SMPL-X](https://github.com/vchoutas/smplx). We also wish to thank [SlimeVRX](https://github.com/SlimeVRX) for their collaboration on the development of the `bvh2smplx_` task. For a more detailed list of acknowledgments, please refer to our paper. 
 
 <br/>
 
