@@ -176,7 +176,7 @@ Once the above setup is correctly done, you can execute the following:
 
 
 - [x] **bvh2smplx_**  
-  Convert BVH to SMPL-X using the provided BMAP presets from the AMUSE website download page. Note that this feature is experimental and not officially supported. Place the BVH file inside `$AMUSEPATH/data/beat-rawdata-eng/beat_rawdata_english/<<actor_id>>`, where `actor_id` is a number between 1 and 30. The converted file will be located in `$AMUSEPATH/viz_dump/smplx_conversions`.
+  Convert BVH to SMPL-X using the provided BMAP presets from the AMUSE website download page. Place the BVH file inside `$AMUSEPATH/data/beat-rawdata-eng/beat_rawdata_english/<<actor_id>>`, where `actor_id` is a number between 1 and 30. The converted file will be located in `$AMUSEPATH/viz_dump/smplx_conversions`.
   ```bash
   cd $AMUSEPATH/scripts
   python main.py --fn bvh2smplx_
@@ -198,6 +198,8 @@ Once the above setup is correctly done, you can execute the following:
 
 ## Citation
 
+If you find the Model & Software, BVH2SMPLX conversion tool, and SMPLX Blender addon-based visualization software useful in your research, we kindly ask that you cite our work:
+
 ```bibtex
 @InProceedings{Chhatre_2024_CVPR,
     author    = {Chhatre, Kiran and Daněček, Radek and Athanasiou, Nikos and Becherini, Giorgio and Peters, Christopher and Black, Michael J. and Bolkart, Timo},
@@ -210,6 +212,24 @@ Once the above setup is correctly done, you can execute the following:
 }
 ```
 
+Additionally, if you use the [AMUSE-BEAT data](https://amuse.is.tue.mpg.de/download.php) in your research, please also consider citing both the AMUSE and [EMAGE](https://pantomatrix.github.io/EMAGE/) projects.
+
+<br/>
+
+## License
+
+Software Copyright License for non-commercial scientific research purposes.
+Please read carefully the following [terms and conditions](LICENSE) and any accompanying
+documentation before you download and/or use AMUSE model, AMUSE-BEAT data and
+software, (the "Data & Software"), including 3D meshes, images, videos,
+textures, software, scripts, and animations. By downloading and/or using the
+Data & Software (including downloading, cloning, installing, and any other use
+of the corresponding github repository), you acknowledge that you have read
+these [terms and conditions](LICENSE), understand them, and agree to be bound by them. If
+you do not agree with these [terms and conditions](LICENSE), you must not download and/or
+use the Data & Software. Any infringement of the terms of this agreement will
+automatically terminate your rights under this [License](LICENSE).
+
 <br/>
 
 ## Acknowledgments
@@ -220,4 +240,4 @@ We would like to extend our gratitude to the authors and contributors of the fol
 
 ## Contact
 
-For any inquiries, please feel free to contact [amuse@tue.mpg.de](mailto:amuse@tue.mpg.de). Feel free to use this project and contribute to its improvement.
+For any inquiries, please feel free to contact [amuse@tue.mpg.de](mailto:amuse@tue.mpg.de). Feel free to use this project and contribute to its improvement. For commercial uses of the Data & Software, please send an email to [ps-license@tue.mpg.de](mailto:ps-license@tue.mpg.de).
