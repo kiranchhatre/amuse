@@ -705,7 +705,8 @@ class dm():
         # actors, actors_to_exclude = list(range(1, 31)), [11,20,24,25]    # test
         emotional_actors = [str(a) for a in actors if a not in actors_to_exclude]
         # pretrained_takes = ["65", "66", "73", "74", "81", "82", "87", "88", "95", "96", "103", "104", "111", "112"]
-        pretrained_takes = ["9", "10", "65", "66", "73", "74", "81", "82", "87", "88", "95", "96", "103", "104", "111", "112"]
+        # pretrained_takes = ["9", "10", "65", "66", "73", "74", "81", "82", "87", "88", "95", "96", "103", "104", "111", "112"]
+        pretrained_takes = ["9", "10", "65", "66", "67", "73", "74", "81", "82", "85", "87", "88", "95", "96", "103", "104", "111", "112"] # batch edit tests
         if not "moshed_v1" in str(self.smplx_extract_path): self.smplx_extract_path = self.config["DATA_PARAM"]["Bvh"]["mosh_extract_path_v1"]
         all_processed_motions = [str(p) for p in Path(self.smplx_extract_path).glob("*.npz")]                                # 1620
         processed_motions = [p for p in all_processed_motions if Path(p).stem.split("_")[0] in emotional_actors and \
@@ -721,7 +722,7 @@ class dm():
             actors = self.config["TRAIN_PARAM"]["test"]["style_transfer"]["actors"]
             emotion = self.config["TRAIN_PARAM"]["test"]["style_transfer"]["emotion"]
             data_dict = style_transfer_dict(actors, emotion)
-        
+
             info, dd = self._preprare_data_dict_v1(data_dict, all_wav, motion_npzs)
             eval_dm["style_transfer"] = dd
             eval_dm["style_transfer_info"] = info

@@ -77,9 +77,11 @@ def subject2genderbeta_1(subject):
         return np.array("female", dtype='<U7'), fetchbetas_1(subject)
     
 neutral_takes = ["0_9_9", "0_10_10"]
-happy_takes = ["0_65_65", "0_66_66"]
+# happy_takes = ["0_65_65", "0_66_66"] 
+happy_takes = ["0_65_65", "0_67_67"] # batch edit tests
 angry_takes = ["0_73_73", "0_74_74"]
-sad_takes = ["0_81_81", "0_82_82"]
+# sad_takes = ["0_81_81", "0_82_82"]
+sad_takes = ["0_81_81", "0_85_85"] # batch edit tests
 contempt_takes = ["0_87_87", "0_88_88"]
 surprise_takes = ["0_95_95", "0_96_96"]
 fear_takes = ["0_103_103", "0_104_104"]

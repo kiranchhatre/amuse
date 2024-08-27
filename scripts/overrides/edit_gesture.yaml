@@ -33,7 +33,7 @@ TRAIN_PARAM:
     model: 
   test:
     emotion_control_list:
-      use: True # False True            
+      use: False # False True            
       overwrite: "amusepp_all_tests/SUPMATMETRIC-LPDM_20231028-210758_actors_smplx"
       actor: "miranda"
       audios: "/home/kchhatre/Work1/code/amuse/viz_dump/test/e_speech"
@@ -45,10 +45,10 @@ TRAIN_PARAM:
       content_emotion: "[neutral]"
       take_element: "first" # first last random
     style_transfer:
-      use: False # False True
-      overwrite: 
-      actors: "[lu-lawrence]"
-      emotion: "[angry]"
+      use: True # False True
+      overwrite: "edit_batch_tests"
+      actors: "[ayana-scott]" # content: wayne, ayana -- (miranda, solomon, scott)
+      emotion: "[happy]" # sad, neutral, happy
     style_Xemo_transfer:
       use: False # False True
       overwrite: "amusepp_all_tests/SUPMAT-styleXem-LPDM_20231028-210758_actors_smplx"

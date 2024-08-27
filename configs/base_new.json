@@ -79,14 +79,14 @@
         "tag": "latent_diffusion",
         "motion_extractor": {
             "use": false,
-            "tag": "motion_feature_extractor",
+            "tag": null,
             "task": "train",
             "metrics_only": false
         },
         "parallelism": "none",
         "seed": 2024,
         "display_model_info": false,
-        "pretrained_infer": false,
+        "pretrained_infer": true,
         "val_actors": [
             "solomon",
             "kexin",
@@ -287,7 +287,7 @@
             "pretrained_audioemo": "",
             "pretained_baseaudio": "",
             "pretrained_diffusion": "",
-            "pretrained_lpdm": "",
+            "pretrained_lpdm": "LPDM_20231028-210758_actors_smplx",
             "pretrained_prior_lpdm_e": "best",
             "pretrained_ldm_lpdm_e": "best",
             "n_epochs": 12000,
@@ -297,13 +297,13 @@
                 "BLENDER_EEVEE",
                 "CYCLES"
             ],
-            "half_body": false,
+            "half_body": true,
             "train_upper_body": false,
             "skip_trans": false,
             "lock_pymo_root": false,
             "zero_trans": false,
             "freeze_init_LoBody": false,
-            "vtex_displacement": true,
+            "vtex_displacement": false,
             "ablation_diffusion_only": false,
             "arch": "diff_latent_v2",
             "viz_freq": 200,
@@ -333,10 +333,10 @@
                 "take_element": "first"
             },
             "style_transfer": {
-                "use": false,
-                "overwrite": null,
-                "actors": "[lu-lawrence]",
-                "emotion": "[angry]"
+                "use": true,
+                "overwrite": "edit_batch_tests",
+                "actors": "[ayana-scott]",
+                "emotion": "[happy]"
             },
             "style_Xemo_transfer": {
                 "use": false,
@@ -358,7 +358,14 @@
                 "vidlist": "vidlist.csv",
                 "vidlists": "vidlist.csv, XXX.csv"
             },
-            "diff_only": false
+            "diff_only": false,
+            "emotion_control_list": {
+                "use": false,
+                "overwrite": "amusepp_all_tests/SUPMATMETRIC-LPDM_20231028-210758_actors_smplx",
+                "actor": "miranda",
+                "audios": "/home/kchhatre/Work1/code/amuse/viz_dump/test/e_speech",
+                "renders": "/home/kchhatre/Work1/code/amuse/viz_dump/test/e_gesture"
+            }
         },
         "baselines": {
             "run": false,
@@ -372,6 +379,9 @@
                 "custom_audios": "/home/kchhatre/Work1/code/amuse/viz_dump/test/speech",
                 "custom_renders": "/home/kchhatre/Work1/code/amuse/viz_dump/test/gesture"
             }
+        },
+        "motion_feature_extractor": {
+            "model": null
         }
     }
 }

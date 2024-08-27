@@ -525,4 +525,5 @@ def mapinfo2takes(info, trainer=False):
     elif "disgust" in info: return disgust_takes
     elif "surprise" in info: return surprise_takes
     elif "fear" in info: return fear_takes
+    elif "neutral" in info: return neutral_takes # batch edit tests
     else: raise Exception("Unknown emotion: ", info) 
