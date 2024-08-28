@@ -176,6 +176,12 @@ Once the above setup is correctly done, you can execute the following:
 
 
 - [x] **bvh2smplx_**  
+  The BVH import process can cause inaccuracies due to Euler angle singularities, where different sets of rotation angles correspond to the same rotation. We hacked this issue by modifying the Blender source code within the `import_bvh.py` file of the `io_anim_bvh` addon, although it's not a perfect solution. Specifically, in the `dm.beat2smplnpz()` function, we made the following change in `<YOUR-PATH>/blender-3.6.0-linux-x64/3.6/scripts/addons/io_anim_bvh/import_bvh.py`:
+
+  - **Lines 636-637:** Toggled the rotation argument from `True` to `False`:
+    - **Before:** `bpy.ops.object.transform_apply(location=False, rotation=True, scale=False)`
+    - **After:** `bpy.ops.object.transform_apply(location=False, rotation=False, scale=False)`
+
   Convert BVH to SMPL-X using the provided BMAP presets from the AMUSE website download page. Place the BVH file inside `$AMUSEPATH/data/beat-rawdata-eng/beat_rawdata_english/<<actor_id>>`, where `actor_id` is a number between 1 and 30. The converted file will be located in `$AMUSEPATH/viz_dump/smplx_conversions`.
   ```bash
   cd $AMUSEPATH/scripts
