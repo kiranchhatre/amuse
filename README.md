@@ -25,7 +25,10 @@
   <a href='https://amuse.is.tue.mpg.de/' style='padding-left: 0.5rem;'>
       <img src='https://img.shields.io/badge/AMUSE-Page-pink?style=for-the-badge&logo=Google%20chrome&logoColor=pink' alt='Project Page'>
     </a>
-     <a href='https://arxiv.org/abs/2312.04466'>
+    <a href='https://huggingface.co/papers/2312.04466' style='padding-left: 0.5rem;'>
+      <img src='https://img.shields.io/badge/Hugging%20Face-Models%20%26%20Data-yellow?style=for-the-badge' alt='Hugging Face Release'>
+    </a>
+    <a href='https://arxiv.org/abs/2312.04466' style='padding-left: 0.5rem;'>
       <img src='https://img.shields.io/badge/Paper-PDF-green?style=for-the-badge&logo=arXiv&logoColor=green' alt='Paper PDF'>
     </a>
     <a href='https://youtu.be/gsEt9qtR1jk' style='padding-left: 0.5rem;'>
@@ -51,6 +54,7 @@ This is a repository for **AMUSE**: Emotional Speech-driven 3D Body Animation vi
 
 ## News :triangular_flag_on_post:
 
+- [2026/07/10] Hugging Face releases are available: [LPDM model](https://huggingface.co/kiranchhatre/amuse-lpdm), [audio model](https://huggingface.co/kiranchhatre/amuse-audio), and [AMUSE-BEAT dataset](https://huggingface.co/datasets/kiranchhatre/amuse-beat).
 - [2024/07/25] Data processing and gesture editing scripts are available. 
 - [2024/06/12] Code is available.
 - [2024/02/27] AMUSE has been accepted for CVPR 2024! Working on code release.
